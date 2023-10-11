@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
     //state variables
   const [initialValue, setInitialValue] = useState({
     firstName: "",
@@ -10,13 +11,42 @@ const Signup = () => {
     email : "",
     password: "",
   });
-  const [formValue, setFormValue] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
 
-  // use browser local storage, figure out the protected routes later
-  const handleSubmit = () => {
-    console.log(initialValue, "initial");
-    setFormValue((prevFormValues) => [...prevFormValues, initialValue]);
-    localStorage.setItem("formValues", JSON.stringify(initialValue));
+  // Checking fields for validation manually (email and password)
+  const validateForm = () => {
+    const errors = {};
+
+    if (!initialValue.firstName) {
+      errors.firstName = "First name is required";
+    }
+    if (!initialValue.lastName) {
+      errors.lastName = "Last name is required";
+    }
+    if (!initialValue.email) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(initialValue.email)) {
+      errors.email = "Email is invalid";
+    }
+    if (!initialValue.password) {
+      errors.password = "Password is required";
+    } else if (!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(initialValue.password)) {
+      errors.password =
+        "Password must be 8 characters including 1 number and 1 uppercase";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log(initialValue, "initial");
+      localStorage.setItem("email", initialValue.email);
+      localStorage.setItem("password", initialValue.password);
+      navigate("/login");
+    }
   };
 
   return (
@@ -38,6 +68,9 @@ const Signup = () => {
                   setInitialValue({ ...initialValue, firstName: e.target.value })
                 }
           />
+          {formErrors.firstName && (
+                  <div className="text-red-500">{formErrors.firstName}</div>
+                )}
           <input
             className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
             type="text"
@@ -45,6 +78,9 @@ const Signup = () => {
             value={initialValue?.lastName}
             onChange={(e)=> setInitialValue({...initialValue , lastName : e.target.value })}
           />
+          {formErrors.lastName && (
+                  <div className="text-red-500">{formErrors.lastName}</div>
+                )}
           <input
             className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
             type="text"
@@ -52,6 +88,9 @@ const Signup = () => {
             value={initialValue.email}
             onChange={(e) => setInitialValue({...initialValue , email : e.target.value})}
           />
+          {formErrors.email && (
+                  <div className="text-red-500">{formErrors.email}</div>
+                )}
           <input
             className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
             type="text"
@@ -59,6 +98,9 @@ const Signup = () => {
             value={initialValue?.password}
             onChange={(e) => setInitialValue({...initialValue , password : e.target.value})}
           />
+          {formErrors.password && (
+                  <div className="text-red-500">{formErrors.password}</div>
+                )}
           <button onClick={handleSubmit} className="w-5/6 bg-[#349795] rounded mt-8 py-1.5 text-white">
             Sign Up
           </button>
