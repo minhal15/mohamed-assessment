@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Login from "./components/Login.jsx";
-import Signup from "./components/Signup.jsx";
-import Dashboard from "./components/Dashboard.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext.js";
 import ModeToggle from "./components/ModeToggle.jsx";
 import { BsFillMoonStarsFill } from "react-icons/bs";
-import NotFound from "./components/NotFound.jsx";
+import NotFound from "./pages/NotFound";
 
 function ProtectedRoute({ element, ...rest }) {
   const { authenticated } = useAuth();

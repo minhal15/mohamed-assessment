@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import AddUserModal from "./AddUserModal";
+import AddUserModal from "../components/AddUserModal";
 import { addUser, editUser, deleteUser } from "../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSearchData } from "../redux/actions/userActions";
@@ -158,8 +158,12 @@ const Dashboard = () => {
                     </button>
                     <button
                       className="btn bg-[#FF3C3C] w-auto rounded-md p-0 h-[30px] px-3 text-base "
-                      onClick={() => deleteItem(item?.name)}
-                    >
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to delete?")) {
+                          deleteItem(item?.name);
+                        }
+                      }}
+                      >
                       Delete
                     </button>
                   </td>
