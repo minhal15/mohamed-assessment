@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext.js";
 import ModeToggle from "./components/ModeToggle.jsx";
 import { BsFillMoonStarsFill } from "react-icons/bs";
-
+import NotFound from "./components/NotFound.jsx";
 
 function ProtectedRoute({ element, ...rest }) {
   const { authenticated } = useAuth();
 
-  return authenticated ? element : <Navigate to="/login" />;
+  // Return unauthenticated users to 404 page
+  return authenticated ? element : <Navigate to="/*" />;
 }
 
 function App() {
@@ -48,12 +49,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="login" element={<Login />} />
-          {/* <Route path="dashboard" element={<Dashboard />} /> */}
           <Route
               path="dashboard"
               element={<ProtectedRoute element={<Dashboard />} />}
             />
+          <Route path={"/*"} element={<NotFound />} />
         </Routes>
+        
       </BrowserRouter>
     </div>
   );
