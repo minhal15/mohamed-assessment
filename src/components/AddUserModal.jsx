@@ -3,7 +3,10 @@ import { AiOutlineClose } from "react-icons/ai";
 
 const initialValue = {
   name: "",
+  lastName: "",
   phonenumber: "",
+  email: "",
+  address: ""
 };
 const AddUserModal = ({
   OpenModal,
@@ -46,19 +49,37 @@ const AddUserModal = ({
 
                 <div className="relative flex-auto p-6">
                   <div>
-                    <label htmlFor="firstname" className="font-bold">
+                    <label htmlFor="name" className="font-bold">
                       First Name
                     </label>
                     <input
                       className=""
                       type="text"
                       placeholder="First Name"
-                      id="firstname"
+                      id="name"
                       value={InputData.name}
                       onChange={(e) =>
                         SetInputData({
                           ...InputData,
                           name: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="font-bold">
+                      Last Name
+                    </label>
+                    <input
+                      className=""
+                      type="text"
+                      placeholder="Last Name"
+                      id="lastName"
+                      value={InputData.lastName}
+                      onChange={(e) =>
+                        SetInputData({
+                          ...InputData,
+                          lastName: e.target.value,
                         })
                       }
                     />
@@ -77,6 +98,42 @@ const AddUserModal = ({
                         SetInputData({
                           ...InputData,
                           phonenumber: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="font-bold">
+                      Email
+                    </label>
+                    <input
+                      className=""
+                      type="text"
+                      placeholder="Email"
+                      id="email"
+                      value={InputData.email}
+                      onChange={(e) =>
+                        SetInputData({
+                          ...InputData,
+                          email: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="address" className="font-bold">
+                      Address
+                    </label>
+                    <input
+                      className=""
+                      type="text"
+                      placeholder="Address"
+                      id="address"
+                      value={InputData.address}
+                      onChange={(e) =>
+                        SetInputData({
+                          ...InputData,
+                          address: e.target.value,
                         })
                       }
                     />
