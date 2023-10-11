@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 const initialValue = {
-  name: "",
+  firstName: "",
   lastName: "",
   phonenumber: "",
   email: "",
@@ -56,7 +56,7 @@ const AddUserModal = ({
                       className=""
                       type="text"
                       placeholder="First Name"
-                      id="name"
+                      id="firstName"
                       value={InputData.name}
                       onChange={(e) =>
                         SetInputData({

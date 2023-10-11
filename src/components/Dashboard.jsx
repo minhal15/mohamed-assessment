@@ -119,7 +119,12 @@ const Dashboard = () => {
                     </button>
                     <button
                       className="btn bg-[#FF3C3C] w-auto px-4 tablet:py-0 rounded-md text-base tablet:text-lg py-1"
-                      onClick={() => deleteItem(item?.name)}
+                      onClick={() => {
+                        const isConfirmed = window.confirm("Are you sure you want to delete this contact?");
+                        if (isConfirmed) {
+                          deleteItem(item?.name);
+                        }
+                      }}
                     >
                       Delete
                     </button>
