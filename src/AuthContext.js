@@ -6,10 +6,10 @@ export function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    const storedEmail = localStorage.getItem("email");
+    const storedFirstName = localStorage.getItem("firstName");
     const storedPassword = localStorage.getItem("password");
-    const userIsAuthenticated = storedEmail && storedPassword;
-    console.log(storedEmail && storedPassword, "ss");
+    const userIsAuthenticated = storedFirstName && storedPassword;
+    console.log(storedFirstName && storedPassword, "ss");
     setAuthenticated(userIsAuthenticated);
   }, []);
 
