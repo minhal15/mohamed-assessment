@@ -4,16 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
-    //state variables
   const [initialValue, setInitialValue] = useState({
     firstName: "",
-    lastName : "",
-    email : "",
+    lastName: "",
+    email: "",
     password: "",
   });
   const [formErrors, setFormErrors] = useState({});
 
-  // Checking fields for validation manually (email and password)
   const validateForm = () => {
     const errors = {};
 
@@ -43,7 +41,7 @@ const Signup = () => {
     e.preventDefault();
     if (validateForm()) {
       console.log(initialValue, "initial");
-      localStorage.setItem("email", initialValue.email);
+      localStorage.setItem("firstName", initialValue.firstName);
       localStorage.setItem("password", initialValue.password);
       navigate("/login");
     }
@@ -51,67 +49,104 @@ const Signup = () => {
 
   return (
     <>
-  <div className="h-screen w-screen bg-[#F0E7DC]">
-    <Navbar/>
-     <div className="flex justify-center items-center h-5/6">
-        <div className="w-5/12 h-5/6  px-2 py-2 ">
-          <h3 className="font-semibold text-sm text-[#349795]">SIGN UP</h3>
-          <h2 className="font-bold text-xl mt-2 ">
-            Simplify Contact Management
-          </h2>
-          <input
-            className=" bg-[#F0E7DC] mt-6 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="First Name"
-            value={initialValue?.firstName}
-            onChange={(e) =>
-                  setInitialValue({ ...initialValue, firstName: e.target.value })
-                }
-          />
-          {formErrors.firstName && (
+      <div className="">
+        <div className="container">
+          <Navbar />
+          <div className="flex items-center justify-center ">
+            <div className="w-[531px] px-2 py-2">
+              <h3 className="font-black text-base text-[#349795] dark:text-[#83E6D9] uppercase">
+                SIGN UP
+              </h3>
+              <h2 className="mt-2 tablet:text-[32px] text-[24px] font-bold ">
+                Simplify Contact Management
+              </h2>
+
+              <form className="flex flex-col items-center justify-center gap-6 mt-5">
+                <input
+                  className=""
+                  type="text"
+                  placeholder="First Name"
+                  value={initialValue.firstName}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      firstName: e.target.value,
+                    })
+                  }
+                />
+                {formErrors.firstName && (
                   <div className="text-red-500">{formErrors.firstName}</div>
                 )}
-          <input
-            className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="Last Name"
-            value={initialValue?.lastName}
-            onChange={(e)=> setInitialValue({...initialValue , lastName : e.target.value })}
-          />
-          {formErrors.lastName && (
+                <input
+                  className=""
+                  type="text"
+                  placeholder="Last Name"
+                  value={initialValue.lastName}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      lastName: e.target.value,
+                    })
+                  }
+                />
+                {formErrors.lastName && (
                   <div className="text-red-500">{formErrors.lastName}</div>
                 )}
-          <input
-            className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="E-mail"
-            value={initialValue.email}
-            onChange={(e) => setInitialValue({...initialValue , email : e.target.value})}
-          />
-          {formErrors.email && (
+                <input
+                  className=""
+                  type="email"
+                  placeholder="E-mail"
+                  value={initialValue.email}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      email: e.target.value,
+                    })
+                  }
+                />
+                {formErrors.email && (
                   <div className="text-red-500">{formErrors.email}</div>
                 )}
-          <input
-            className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="Password"
-            value={initialValue?.password}
-            onChange={(e) => setInitialValue({...initialValue , password : e.target.value})}
-          />
-          {formErrors.password && (
+                <input
+                  className=""
+                  type="text"
+                  placeholder="Password"
+                  value={initialValue.password}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      password: e.target.value,
+                    })
+                  }
+                />
+                {formErrors.password && (
                   <div className="text-red-500">{formErrors.password}</div>
                 )}
-          <button onClick={handleSubmit} className="w-5/6 bg-[#349795] rounded mt-8 py-1.5 text-white">
-            Sign Up
-          </button>
-        <div className="flex text-xs mt-4">
-        <p>Already have an account?</p><Link to={"/login"} className="text-[#349795] ml-1">Login</Link>
+                <button
+                  onClick={handleSubmit}
+                  className="mt-2 text-2xl btn btn-primary"
+                >
+                  Sign Up
+                </button>
+              </form>
+
+              <div className="flex text-base mt-[20px] font-normal">
+                <p>Already have an account? </p>
+                <Link
+                  to={"/login"}
+                  className="text-[#349795] dark:text-[#E95EB2] ml-1"
+                >
+                  Login
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       </div>
     </>
   );
 };
 
 export default Signup;
+
+//////////////////////////////

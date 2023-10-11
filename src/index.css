@@ -2,3 +2,172 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base{
+    input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background: transparent !important;
+  color: #f3f4f4 !important;
+  transition: background 5000s ease-in;
+}
+[type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    @apply transition duration-200  h-[54px] py-2 font-medium w-full bg-transparent text-black  border-b-2 border-black dark:border-[#FFFFFF] dark:text-white;
+  }
+  [type="text"]:focus,
+  [type="email"]:focus,
+  [type="url"]:focus,
+  [type="password"]:focus,
+  [type="number"]:focus,
+  [type="date"]:focus,
+  [type="datetime-local"]:focus,
+  [type="month"]:focus,
+  [type="search"]:focus,
+  [type="tel"]:focus,
+  [type="time"]:focus,
+  [type="week"]:focus,
+  [multiple]:focus,
+  textarea:focus,
+  select:focus,
+  [type="text"]:focus-visible,
+  [type="email"]:focus-visible,
+  [type="url"]:focus-visible,
+  [type="password"]:focus-visible,
+  [type="number"]:focus-visible,
+  [type="date"]:focus-visible,
+  [type="datetime-local"]:focus-visible,
+  [type="month"]:focus-visible,
+  [type="search"]:focus-visible,
+  [type="tel"]:focus-visible,
+  [type="time"]:focus-visible,
+  [type="week"]:focus-visible,
+  [multiple]:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply shadow-none ;
+    --tw-ring-color: #f3f4f4 !important;
+    --tw-ring-shadow: unset !important;
+    outline: unset !important;
+  }
+  [type="text"].green:focus,
+  [type="email"].green:focus,
+  [type="url"].green:focus,
+  [type="password"].green:focus,
+  [type="number"].green:focus,
+  [type="date"].green:focus,
+  [type="datetime-local"].green:focus,
+  [type="month"].green:focus,
+  [type="search"].green:focus,
+  [type="tel"].green:focus,
+  [type="time"].green:focus,
+  [type="week"].green:focus,
+  [multiple].green:focus,
+  textarea.green:focus,
+  select.green:focus {
+    @apply ;
+    --tw-ring-color: #107c10 !important;
+    border-color: #107c10 !important;
+  }
+  [type="text"].red:focus,
+  [type="email"].red:focus,
+  [type="url"].red:focus,
+  [type="password"].red:focus,
+  [type="number"].red:focus,
+  [type="date"].red:focus,
+  [type="datetime-local"].red:focus,
+  [type="month"].red:focus,
+  [type="search"].red:focus,
+  [type="tel"].red:focus,
+  [type="time"].red:focus,
+  [type="week"].red:focus,
+  [multiple].red:focus,
+  textarea.red:focus,
+  select.red:focus {
+    @apply border-red-dark;
+    --tw-ring-color: #a80000 !important;
+    border-color: #a80000 !important;
+  }
+
+  [type="number"]::-webkit-outer-spin-button,
+  [type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+  tbody {
+    display: block;
+    max-height: 450px;
+    overflow: auto;
+  }
+  thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  svg {
+    font-size: inherit;
+  }
+    
+
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply break-words  !important;
+  }
+  a {
+    @apply no-underline ;
+    text-decoration: none;
+
+  }
+
+}
+@layer components{
+
+  .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dark:has(h1, h2, h3,h4,h5,h6,p,a,strong,span,li,label){
+    color: white ;
+  }
+
+    .btn{
+        @apply h-[49px] px-10 rounded-[10px] w-full capitalize transition duration-300  py-1.5 ;
+    } 
+    .btn-primary{
+        @apply text-white bg-[#349795] dark:text-black dark:bg-[#83E6D9];
+    }
+.subtitle1 {
+    @apply text-[16px] font-normal;
+    line-height: 1.3;
+  }
+
+
+}
+@layer utilities{
+
+}
