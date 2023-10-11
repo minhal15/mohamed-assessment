@@ -3,13 +3,13 @@
   import { Link , useNavigate } from "react-router-dom";
 
   const Login = () => {
-    const [email, setEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleEmailChange = (event) => {
-      setEmail(event.target.value);
+    const handleFirstNameChange = (event) => {
+      setFirstName(event.target.value);
     };
 
     const handlePasswordChange = (event) => {
@@ -20,10 +20,10 @@
     const handleSubmit = (event) => {
       event.preventDefault();
 
-      const storedEmail = localStorage.getItem("email");
+      const storedFirstName = localStorage.getItem("firstName");
       const storedPassword = localStorage.getItem("password");
 
-      if (storedEmail === email && storedPassword === password) {
+      if (storedFirstName === firstName && storedPassword === password) {
         navigate("/dashboard");
       } else {
         setError("Invalid credentials. Please try again.");
@@ -45,9 +45,9 @@
               <input
                   className="mt-6 py-1.5 w-5/6 border-b-2 border-black"
                   type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={handleEmailChange}
+                  placeholder="First Name"
+                  value={firstName}
+                  onChange={handleFirstNameChange}
                 />
 
           <input
