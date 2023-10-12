@@ -1,4 +1,4 @@
-  import React, { useEffect, useState } from "react";
+  import React, { useState } from "react";
   import Navbar from "../components/Navbar";
   import { Link , useNavigate } from "react-router-dom";
 
@@ -59,13 +59,13 @@
           />
 
           {error && <div className="text-red-500">{error}</div>}
-          <button className="w-5/6 bg-[#349795] rounded mt-8 py-1.5 text-white" type="submit">
+          <button className="w-5/6 bg-[#349795] rounded mt-8 py-1.5 text-white">
             Login
           </button>
         </form>
               <div className="flex text-xs mt-4">
                 <p>Don't have an account yet?</p>
-                <Link to={"/"} className="text-[#349795] ml-1">
+                <Link to={"/"} className="text-[#349795] dark:text-[#E95EB2] ml-1">
                   Sign Up{" "}
                 </Link>
               </div>
