@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Navbar from "../components/Navbar.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const Signup = () => {
     email : "",
     password: "",
   });
-  const [formValue, setFormErrors] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
 
   const validateForm = () => {
     const errors = {};
@@ -44,60 +44,115 @@ const Signup = () => {
       localStorage.setItem("firstName", initialValue.firstName);
       localStorage.setItem("password", initialValue.password);
       navigate("/login");
+      window.location.reload(true);
     }
   };
 
+  const errorDisplays = useMemo(
+    () => ({
+      firstName: formErrors.firstName && (
+        <div className="text-red-500">{formErrors.firstName}</div>
+      ),
+      lastName: formErrors.lastName && (
+        <div className="text-red-500">{formErrors.lastName}</div>
+      ),
+      email: formErrors.email && (
+        <div className="text-red-500">{formErrors.email}</div>
+      ),
+      password: formErrors.password && (
+        <div className="text-red-500">{formErrors.password}</div>
+      ),
+    }),
+    [formErrors]
+  );
+
   return (
     <>
-  <div className="h-screen w-screen bg-[#F0E7DC]">
-    <Navbar/>
-     <div className="flex justify-center items-center h-5/6">
-        <div className="w-5/12 h-5/6  px-2 py-2 ">
-          <h3 className="font-semibold text-sm text-[#349795]">SIGN UP</h3>
-          <h2 className="font-bold text-xl mt-2 ">
-            Simplify Contact Management
-          </h2>
-          <input
-            className=" bg-[#F0E7DC] mt-6 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="First Name"
-            value={initialValue?.firstName}
-            onChange={(e) =>
-                  setInitialValue({ ...initialValue, firstName: e.target.value })
-                }
-          />
-          <input
-            className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="Last Name"
-            value={initialValue?.lastName}
-            onChange={(e)=> setInitialValue({...initialValue , lastName : e.target.value })}
-          />
-          <input
-            className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="E-mail"
-            value={initialValue.email}
-            onChange={(e) => setInitialValue({...initialValue , email : e.target.value})}
-          />
-          <input
-            className=" bg-[#F0E7DC] mt-4 py-1.5 w-5/6 border-b-2 border-black"
-            type="text"
-            placeholder="Password"
-            value={initialValue?.password}
-            onChange={(e) => setInitialValue({...initialValue , password : e.target.value})}
-          />
-          <button onClick={handleSubmit} className="w-5/6 bg-[#349795] rounded mt-8 py-1.5 text-white">
-            Sign Up
-          </button>
-        <div className="flex text-xs mt-4">
-        <p>Already have an account?</p><Link to={"/login"} className="text-[#349795] ml-1">Login</Link>
+    <div className="h-screen w-screen">
+      <Navbar/>
+      <div className="flex justify-center items-center h-5/6">
+          <div className="w-5/12 h-5/6  px-2 py-2 ">
+            <h3 className="font-black text-base text-[#349795] dark:text-[#83E6D9] uppercase">SIGN UP</h3>
+            <h2 className="mt-2 tablet:text-[32px] text-[24px] font-bold ">
+              Simplify Contact Management
+            </h2>
+            <form className="mt-4 py-1.5 w-5/6">
+              <div className="w-full">
+                <input
+                  className=""
+                  type="text"
+                  placeholder="First Name"
+                  value={initialValue.firstName}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      firstName: e.target.value,
+                    })
+                  }
+                />
+                {errorDisplays?.firstName}
+              </div>
+              <div className="w-full">
+                <input
+                  className=""
+                  type="text"
+                  placeholder="Last Name"
+                  value={initialValue.lastName}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      lastName: e.target.value,
+                    })
+                  }
+                />
+                {errorDisplays?.lastName}
+              </div>
+              <div className="w-full">
+                <input
+                  className=""
+                  type="email"
+                  placeholder="E-mail"
+                  value={initialValue.email}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      email: e.target.value,
+                    })
+                  }
+                />
+                {errorDisplays?.email}
+              </div>
+              <div className="w-full">
+                <input
+                  className=""
+                  type="text"
+                  placeholder="Password"
+                  value={initialValue.password}
+                  onChange={(e) =>
+                    setInitialValue({
+                      ...initialValue,
+                      password: e.target.value,
+                    })
+                  }
+                />
+                {errorDisplays?.password}
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                className="w-full bg-[#349795] rounded mt-8 py-1.5 text-white" type="submit"
+              >
+                Sign Up
+              </button>
+            </form>
+          <div className="flex text-xs mt-4">
+          <p>Already have an account?</p><Link to={"/login"} className="text-[#349795] dark:text-[#E95EB2] ml-1">Login</Link>
+          </div>
+          </div>
         </div>
         </div>
-      </div>
-      </div>
     </>
   );
 };
 
-export default React.memo(Signup);
+export default Signup;

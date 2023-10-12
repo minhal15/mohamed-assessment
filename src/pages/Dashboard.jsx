@@ -5,6 +5,8 @@ import { addUser, editUser, deleteUser } from "../redux/actions/userActions";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSearchData } from "../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
+import editIcon from "../assets/edit.svg";
+import deleteIcon from "../assets/trash.svg";
 
 const initialValue = {
   name: "",
@@ -19,7 +21,7 @@ const Dashboard = () => {
   const [editIndex, setEditIndex] = useState(null);
   const [inputData, setInputData] = useState({ 
     name: "",
-  phonenumber: "",
+    phonenumber: "",
   });
 
   // Get users first Name for Welcome
@@ -70,7 +72,6 @@ const Dashboard = () => {
     }
   };
 
-
   const filteredData = userData.filter((item) =>
     item.name.toLowerCase().includes(searchData.toLowerCase())
   );
@@ -89,7 +90,7 @@ const Dashboard = () => {
   return (
     <div className="py-8">
       <div className="container ">
-        <div className="flex flex-col items-center justify-between gap-4 tablet:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 tablet:flex-row mt-10">
           {/* Welcome user with first name */}
           <h3 className="text-xl tablet:text-[22px] lg:text-[48px] font-bold">
             Hello {UserFirstName}
@@ -124,17 +125,17 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        <div className="w-full overflow-x-auto mt-[40px]">
-          <table className="tablet:w-full w-[150%] p-2">
-            <thead className="bg-[#EAD1B2] dark:bg-[#2C2C2C] ">
+        <div className="w-full overflow-x-auto mt-10">
+          <table className="min-w-full p-2">
+            <thead className="bg-[#EAD1B2] dark:bg-[#2C2C2C]">
               <tr className="border-b border-[#92744F] dark:border-[#414141]">
-                <th className="px-4 py-3 subtitle1 text-[18px] font-medium text-left">
+                <th className="px-2 py-3 sm:px-4 sm:py-3 text-[14px] sm:text-[18px] font-medium text-left">
                   First Name
                 </th>
-                <th className="px-4 py-3 subtitle1 text-[18px] font-medium text-left">
+                <th className="px-2 py-3 sm:px-4 sm:py-3 text-[14px] sm:text-[18px] font-medium text-left">
                   Phone
                 </th>
-                <th className="px-4 py-3 subtitle1 text-[18px] font-medium text-center">
+                <th className="px-2 py-3 sm:px-4 sm:py-3 text-[14px] sm:text-[18px] font-medium text-center">
                   Actions
                 </th>
               </tr>
@@ -142,29 +143,39 @@ const Dashboard = () => {
             <tbody>
               {filteredData?.map((item, index) => (
                 <tr
-                  className=" border-b border-[#92744F] dark:border-[#414141]"
+                  className="border-b border-[#92744F] dark:border-[#414141]"
                   key={index}
                 >
-                  <td className="p-2 font-bold">{item?.name}</td>
-                  <td className="p-2 font-bold">{item?.phonenumber}</td>
-                  <td className="flex items-center justify-center gap-3 p-2 text-xl text-white tablet:gap-5">
+                  <td className="px-2 py-2 sm:px-4 sm:py-2 font-semibold">{item?.name}</td>
+                  <td className="px-2 py-2 sm:px-4 sm:py-2 font-semibold">{item?.phonenumber}</td>
+                  <td className="flex items-center justify-center gap-2 sm:gap-5 px-2 py-2 sm:px-4 sm:py-2 text-base text-white">
                     <button
-                      className="btn bg-[#FF7A00] w-auto p-0 h-[30px] px-3 rounded-md text-base"
+                      className="btn-primary w-auto p-0 h-[30px] px-3 rounded-md"
                       onClick={() => (
-                        editItem(item?.name), setEditIndex(item?.name)
+                        editItem(item?.name),
+                        setEditIndex(item?.name)
                       )}
                     >
-                      Edit
+                      <img
+                        src={editIcon} 
+                        alt="Edit"
+                        className="h-5 w-5" 
+                      />
                     </button>
+
                     <button
-                      className="btn bg-[#FF3C3C] w-auto rounded-md p-0 h-[30px] px-3 text-base "
+                      className="btn bg-[#FF3C3C] w-auto rounded-md p-0 h-[30px] px-3 text-base"
                       onClick={() => {
                         if (window.confirm("Are you sure you want to delete?")) {
                           deleteItem(item?.name);
                         }
                       }}
-                      >
-                      Delete
+                    >
+                      <img
+                        src={deleteIcon}
+                        alt="Delete"
+                        className="h-5 w-5" 
+                      />
                     </button>
                   </td>
                 </tr>
